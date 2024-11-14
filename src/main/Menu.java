@@ -1,74 +1,144 @@
 package main;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Scanner;
 
+import controller.ProdutoController;
 import model.Alimento;
 import model.Blusa;
-import model.Produto;
+import model.Eletronico;
 
 public class Menu {
 
-	static Scanner scan = new Scanner(System.in);
 
-	public static void main(String[] args) {
-		HashMap<Integer, Produto> produtos = new HashMap<Integer, Produto>();
+	public static void main(String[] args) {		
+	
+		Scanner scan = new Scanner(System.in);
+		
+		ProdutoController produtos = new ProdutoController();
 		
 		System.out.println("Seja bem vindo ao Ecommerce do Ornitorrinco Vendedor!");
 	
+		String nome, validade;
+		int op, garantia, quantidade, duracaoMediaHoras;
+		float valor;
+		boolean led, ziper, capuz;
 		
-		int op, id, garantia, quantidade;
-		while(true) {
-	
-					
+		//Teste
+		produtos.cadastrarProduto(new Alimento(produtos.gerarNumero(), 
+				"Frango", 12.90f , 1, 200, "12/07/2024"));
+		produtos.cadastrarProduto(new Blusa(2, 
+				"Blusa", 12.90f , 1, 200, "12/07/2024", "GG", true, true));
+		
+		boolean menu = true;
+		
+		while(menu) {
 			System.out.println(
 					 "~".repeat(20) 
 					 + "\nMenu Principal\n" 
 					 + "~".repeat(20)
-					 + "\n[1] - Cadastrar Novo produto"
+					 + "\n[1] - Cadastrar Novo Produto"
 					 + "\n[2] - Listar todos os Produtos"
 					 + "\n[3] - Buscar Produto por Id"
-					 + "\n[5] - Excluir um Produto"
+					 + "\n[4] - Excluir um Produto"
+					 + "\n[5] - Sair"
 					);
 			System.out.print("Opção: ");
 			op = scan.nextInt();
 			
+			if(op == 5) {
+				scan.close();
+				menu = false;
+				break;
+			}
+			
 			switch(op) {
 			case 1 -> 	{
-				id = 1;
-				garantia = 1;
-				quantidade = 2;
-				Produto produto = new Alimento(id, 
-						"Frango", 12.90f , garantia, quantidade, "12/07/2024");
-				Produto produto2 = new Blusa(2, 
-						"Blusa", 12.90f , garantia, quantidade, "12/07/2024", "GG", true, true);
-				produtos.put(produto.getId(), produto);
-				produtos.put(produto2.getId(), produto2);
-				
-				produtos.get(1).visualizar();
-				produtos.get(2).visualizar();
+				try {
+					System.out.print("Cadastrar Novo Produto: ");
+					System.out.println("Nome: ");
+					scan.nextLine();
+					nome = scan.nextLine();
+					
+					System.out.print("Valor: ");
+					valor = scan.nextFloat();
+					
+					System.out.print("Quantidade em Estoque: ");
+					quantidade = scan.nextInt();
+					
+					System.out.print("Tempo de Garantia em Meses: ");
+					garantia = scan.nextInt();
+					
+					System.out.print("Categoria: "
+							+ "\n[1] - Alimento "
+							+ "\n[2] - Eletronico "
+							+ "\n[3] - Roupa");
+					int categoria = scan.nextInt();
+	
+					switch(categoria) {
+					case 1 -> {
+						System.out.print("Expira (formato 00/00/00) em: ");
+						scan.nextLine();
+						validade = scan.nextLine();
+						produtos.cadastrarProduto(new Alimento(produtos.gerarNumero(), 
+								nome, valor , quantidade, garantia, validade));
+					}
+					case 2 -> {
+						System.out.print("Possui Led? true ou false: ");
+						led = scan.nextBoolean();
+						
+						System.out.println("Duração esperada em Horas: ");
+						duracaoMediaHoras = scan.nextInt();
+						produtos.cadastrarProduto(new Eletronico(produtos.gerarNumero(), 
+								nome, valor , quantidade, garantia, led, duracaoMediaHoras));
+					}
+					case 3 -> {
+						System.out.println("Qual tipo de roupa: "
+								+ "[1] Blusa ");
+						int tipo = scan.nextInt();
+						switch(tipo) {
+						case 1 -> {
+							System.out.println("Qual o tamanho(G, GG): ");
+							scan.nextLine();
+							String tamanho = scan.nextLine();
+							
+							System.out.print("Tem ziper? true ou false: ");
+							ziper = scan.nextBoolean();
+							
+							System.out.print("Tem capuz? true or false: ");
+							capuz = scan.nextBoolean();
+							
+							System.out.println("Tipo de tecido: ");
+							scan.nextLine();
+							String tecido = scan.nextLine();
+							
+							produtos.cadastrarProduto(new Blusa(produtos.gerarNumero(), 
+									nome, valor , quantidade, garantia, tecido, tamanho, ziper, capuz));
+								}
+							}
+						}
+					}
+				}catch(Exception e) {
+					e.getMessage();
+				}
 				System.out.println("");
 				pressKey();
 				}
 			case 2 -> 	{
-				
+				System.out.println("Listar todos os Produtos: ");
+				produtos.listarProdutos();
 				pressKey();
 				}
 			case 3 -> 	{
-				
+				System.out.println("Buscar Produto por ID");
+				System.out.print("Id: ");
+				produtos.buscarProdutoPorId(scan.nextInt());
 				pressKey();
 				}
 			case 4 -> 	{
-				
-				pressKey();
-				}
-			case 5 -> 	{
-				
-				pressKey();
-				}
-			case 6 -> 	{
-				
+				System.out.println("Excluir Produto");
+				System.out.print("Id: ");
+				produtos.excluirProduto(scan.nextInt());
 				pressKey();
 				}
 			}

@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.ValorVazioException;
+
 public abstract class Produto {
 	
 	private int id;
@@ -12,13 +14,17 @@ public abstract class Produto {
 		
 	}	
 	
-	public Produto(int id, String nome, float valor, int quantidade, int garantia) {
+	public Produto(int id, String nome, float valor, int quantidade, int garantia) throws ValorVazioException{
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.valor = valor;
 		this.quantidade = quantidade;
 		this.garantia = garantia;
+		
+		if(nome.isBlank()) {
+			throw new ValorVazioException("O nome esta em branco!");
+		}
 	}
 
 	public void visualizar() {
