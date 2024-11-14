@@ -1,32 +1,49 @@
 package main;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Scanner;
+
+import model.Alimento;
+import model.Produto;
 
 public class Menu {
 
 	static Scanner scan = new Scanner(System.in);
 
 	public static void main(String[] args) {
+		HashMap<Integer, Produto> produtos = new HashMap<Integer, Produto>();
 		
+		System.out.println("Seja bem vindo ao Ecommerce do Ornitorrinco Vendedor!");
+	
 		
-		System.out.println("Seja bem vindo ao Ecommerce do Ornitorrinco Vendedor!\"");
+		int op, id, garantia, quantidade;
 		while(true) {
-			
+	
+					
 			System.out.println(
 					 "~".repeat(20) 
 					 + "\nMenu Principal\n" 
 					 + "~".repeat(20)
-					 + "[1] - Cadastrar Novo produto"
-					 + "[2] - Listar todos os Produtos"
-					 + "[3] - Buscar Produto por Id"
-					 + "[4] - Buscar Produto por nome"
-					 + "[5] - Excluir um Produto"
+					 + "\n[1] - Cadastrar Novo produto"
+					 + "\n[2] - Listar todos os Produtos"
+					 + "\n[3] - Buscar Produto por Id"
+					 + "\n[5] - Excluir um Produto"
 					);
-			int op = scan.nextInt();
+			System.out.print("Opção: ");
+			op = scan.nextInt();
 			
 			switch(op) {
 			case 1 -> 	{
+				id = 1;
+				garantia = 1;
+				quantidade = 2;
+				Produto produto = new Alimento(id, 
+						"Frango", 12.90f , garantia, quantidade, "12/07/2024");
+				
+				produtos.put(produto.getId(), produto);
+				
+				produtos.get(1).visualizar();
 				
 				pressKey();
 				}
