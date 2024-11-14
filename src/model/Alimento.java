@@ -5,10 +5,10 @@ public class Alimento extends Produto {
 	private String validade;
 	
 	
-	public Alimento(int id, String nome, float valor, int quantidade, int garantia
+	public Alimento(int id, String nome, float valor, int quantidade, int garantia, int tipo
 			, String validade) {
-		super(id, nome, valor, quantidade, garantia);
-		
+		super(id, nome, valor, quantidade, garantia, tipo);
+				
 		this.validade = validade;
 	}
 	

@@ -9,22 +9,32 @@ public abstract class Produto {
 	private float valor;
 	private int quantidade;
 	private int garantia;
+	private int tipo;
 	
 	public Produto (){
 		
 	}	
 	
-	public Produto(int id, String nome, float valor, int quantidade, int garantia) throws ValorVazioException{
+	public Produto(int id, String nome, float valor, int quantidade, int garantia, int tipo) throws ValorVazioException{
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.valor = valor;
 		this.quantidade = quantidade;
 		this.garantia = garantia;
+		this.tipo = tipo;
 		
 		if(nome.isBlank()) {
 			throw new ValorVazioException("O nome esta em branco!");
 		}
+	}
+
+	public int getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
 	}
 
 	public void visualizar() {

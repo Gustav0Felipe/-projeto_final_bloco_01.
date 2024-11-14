@@ -39,10 +39,16 @@ public class ProdutoController implements ProdutoRepository {
 		return null;
 	}
 
+	@Override
+	public void atualizarProduto(int id, Produto produto) {
+		Optional<Produto> product = Optional.ofNullable(produtos.get(id));
+		if(product.isPresent()) {
+			produtos.put(id, produto);
+		}
+		else System.out.println("Não encontrado");
+	}
 	
 	public int gerarNumero() {
 		return ++ numero;
 	}
-
-	
 }

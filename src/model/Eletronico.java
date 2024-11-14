@@ -5,9 +5,9 @@ public class Eletronico extends Produto{
 	private boolean led;
 	private int duracao;
 	
-	public Eletronico(int id, String nome, float valor, int quantidade, int garantia
+	public Eletronico(int id, String nome, float valor, int quantidade, int garantia, int tipo
 			, boolean led, int duracao) {
-		super(id, nome, valor, quantidade, garantia);
+		super(id, nome, valor, quantidade, garantia, tipo);
 		
 		this.led = led;
 		this.duracao = duracao;

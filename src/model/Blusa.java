@@ -5,9 +5,10 @@ public class Blusa extends Roupa{
 	private boolean ziper;
 	private boolean capuz;
 	
-	public Blusa(int id, String nome, float valor, int quantidade, int garantia, String tecido, String tamanhoCorpo
+	public Blusa(int id, String nome, float valor, int quantidade, int garantia, int tipo
+			, String tecido, String tamanhoCorpo
 			, boolean ziper, boolean capuz) {
-		super(id, nome, valor, quantidade, garantia, tecido, tamanhoCorpo);
+		super(id, nome, valor, quantidade, garantia, tipo, tecido, tamanhoCorpo);
 		this.capuz = capuz;
 		this.ziper = ziper;
 	}
