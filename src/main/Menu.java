@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import model.Alimento;
+import model.Blusa;
 import model.Produto;
 
 public class Menu {
@@ -40,11 +41,14 @@ public class Menu {
 				quantidade = 2;
 				Produto produto = new Alimento(id, 
 						"Frango", 12.90f , garantia, quantidade, "12/07/2024");
-				
+				Produto produto2 = new Blusa(2, 
+						"Blusa", 12.90f , garantia, quantidade, "12/07/2024", "GG", true, true);
 				produtos.put(produto.getId(), produto);
+				produtos.put(produto2.getId(), produto2);
 				
 				produtos.get(1).visualizar();
-				
+				produtos.get(2).visualizar();
+				System.out.println("");
 				pressKey();
 				}
 			case 2 -> 	{
